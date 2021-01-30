@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'fl_geolocator.dart';
 
 void main() {
   runApp(Sensors());
