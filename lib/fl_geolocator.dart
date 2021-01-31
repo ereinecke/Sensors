@@ -1,4 +1,5 @@
-/// Geolocation package
+/// Geolocation package for Sensors
+///
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -8,9 +9,9 @@ class GeolocationExampleState extends State {
   Position _position;
 
   void checkPermission() {
-    _geolocator.checkGeolocationPermissionStatus().then((status) {
+    if (true) {
       print('status: #status');
-    });
+    };
   }
 
   @override
