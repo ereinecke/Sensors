@@ -1,0 +1,40 @@
+PODS:
+  - Flutter (1.0.0)
+  - geolocator (6.1.9):
+    - Flutter
+  - integration_test (0.0.1):
+    - Flutter
+  - location (0.0.1):
+    - Flutter
+  - sensors (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - geolocator (from `.symlinks/plugins/geolocator/ios`)
+  - integration_test (from `.symlinks/plugins/integration_test/ios`)
+  - location (from `.symlinks/plugins/location/ios`)
+  - sensors (from `.symlinks/plugins/sensors/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  geolocator:
+    :path: ".symlinks/plugins/geolocator/ios"
+  integration_test:
+    :path: ".symlinks/plugins/integration_test/ios"
+  location:
+    :path: ".symlinks/plugins/location/ios"
+  sensors:
+    :path: ".symlinks/plugins/sensors/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  geolocator: 057a0c63a43e9c5296d8ad845a3ac8e6df23d899
+  integration_test: 5ed24a436eb7ec17b6a13046e9bf7ca4a404e59e
+  location: 3a2eed4dd2fab25e7b7baf2a9efefe82b512d740
+  sensors: 84eb7a30e47a649e4172b71d6e81be614c280336
+
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+
+COCOAPODS: 1.10.1
