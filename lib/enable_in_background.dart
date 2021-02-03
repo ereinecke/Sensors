@@ -14,7 +14,7 @@ class EnableInBackgroundWidget extends StatefulWidget {
 class _EnableInBackgroundState extends State<EnableInBackgroundWidget> {
   final Location location = Location();
 
-  bool _enabled;
+  bool _enabled = false;
   String _error;
 
   @override
@@ -33,7 +33,7 @@ class _EnableInBackgroundState extends State<EnableInBackgroundWidget> {
     });
   }
 
-  Future<void> _toggleBackgroundMode() async {
+  Future<void> toggleBackgroundMode() async {
     setState(() {
       _error = null;
     });
@@ -55,8 +55,16 @@ class _EnableInBackgroundState extends State<EnableInBackgroundWidget> {
    */
   @override
   Widget build(BuildContext context) {
-    return ;
+    String status = "";
+    if (_error != null) {
+      status = "Aquisition error: " + _error;
+    } else {
+      if (_enabled) {status = "Aquiring sensor data";}
+      else {status = "Aquisition paused";}
+    }
+    // TODO: figure out what to return as the actual widget with no display.
+    return
+      Text(status,
+        textAlign: TextAlign.center);
   }
-
-
 }

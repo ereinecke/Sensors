@@ -40,16 +40,17 @@ class SensorsPage extends StatefulWidget {
 
 /// Saves state for app
 class _SensorsPageState extends State<SensorsPage> {
-  bool updating = false;  // whether to run updates or not
+  bool updating = false; // whether to run updates or not
   final Location location = Location();
   LocationData locationData;
+  final Widget backgroundLocation = new EnableInBackgroundWidget();
 
   /// Store a snapshot of all sensor data collected
   void _saveSensors() {
     setState(() {
-      final snackBar = SnackBar(content: Text('Saving sensor data not yet implemented'));
+      final snackBar =
+          SnackBar(content: Text('Saving sensor data not yet implemented'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
     });
   }
 
@@ -57,16 +58,16 @@ class _SensorsPageState extends State<SensorsPage> {
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called.
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        actions: <Widget>[
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(title: Text(widget.title), actions: <Widget>[
           IconButton(
             icon: updating ? Icon(Icons.play_arrow) : Icon(Icons.pause),
             tooltip: updating ? 'Continuous Updates' : 'Pause Updates',
             onPressed: () {
               setState(() {
                 updating = !updating;
+                backgroundLocation.toggleBackgroundMode();
               });
             },
           ),
@@ -75,18 +76,22 @@ class _SensorsPageState extends State<SensorsPage> {
             tooltip: 'Save location',
             onPressed: () => _saveSensors(),
           ),
-        ]
-      ),
-      body: Center(
-        child: ListView(
-          padding: const EdgeInsets.all(20),
-          children: <Widget>[
-            locationDisplay,
-            gyroSensorsDisplay,
-            fitnessDisplay,
-            activityDisplay,
-            EnableInBackgroundWidget(),
-          ]
+        ]),
+        body: Center(
+          child: Wrap(
+              direction: Axis.horizontal,
+              spacing: 8,
+              runSpacing: 8,
+              alignment: WrapAlignment.start,
+              crossAxisAlignment: WrapCrossAlignment.start,
+              children: <Widget>[
+                backgroundLocation,
+                locationDisplay,
+                gyroSensorsDisplay,
+                fitnessDisplay,
+                activityDisplay,
+                networkDisplay,
+              ]),
         ),
       ),
     );

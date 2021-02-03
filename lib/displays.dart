@@ -35,8 +35,12 @@ final locationDisplay = Card(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text('Location sensors',
-          textAlign: TextAlign.start, style: TextStyle(fontSize: 18)),
-        Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: <Widget>[
+          textAlign: TextAlign.start,
+          style: TextStyle(fontSize: 18)
+        ),
+        Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
           _readout('Longitude', getLatitude(_dummyLocationData)),
           _readout('Latitude', getLongitude(_dummyLocationData)),
           _readout('Alt (m)', getAltitudeMeters(_dummyLocationData)),
@@ -56,7 +60,14 @@ final gyroSensorsDisplay = Card(
       children: <Widget>[
         Text('Gyroscopic sensors',
           textAlign: TextAlign.start, style: TextStyle(fontSize: 18)),
-        Text('More goodies'),
+        Row (
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[ Image(
+            image: AssetImage('images/e-icon.png'),
+            height: 50,
+            width: 50,
+          )],
+        ),
   ]),
 ),
 );
@@ -71,6 +82,7 @@ final activityDisplay = Card(
           Text('Activity detection',
               textAlign: TextAlign.start, style: TextStyle(fontSize: 18)),
           Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 _readout('Activity', 'coding'),
                 _readout('Or Maybe', 'snoozing'),
@@ -90,11 +102,36 @@ final fitnessDisplay = Card(
           Text('Fitness sensors',
               textAlign: TextAlign.start, style: TextStyle(fontSize: 18)),
           Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisSize: MainAxisSize.min,
              children: <Widget>[
                _readout('Steps', '10,000'),
               _readout('Heart Rate', '72'),
           ]),
         ]),
+  ),
+);
+
+/// Card to display network connections
+final networkDisplay = Card(
+  child: Container (
+    color: Colors.teal[50],
+    padding: const EdgeInsets.fromLTRB(8,8,8,12),
+
+    child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text('Network sensors',
+              textAlign: TextAlign.start, style: TextStyle(fontSize: 18)),
+          Row (
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[ Image(
+              image: AssetImage('images/e-icon.png'),
+              height: 50,
+              width: 50,
+            )],
+          ),
+        ],
+    ),
   ),
 );
 
