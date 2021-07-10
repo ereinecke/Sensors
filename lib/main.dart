@@ -65,6 +65,12 @@ class SensorsPageState extends State<SensorsPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(title: Text(widget.title), actions: <Widget>[
+          /*
+          IconButton(
+            icon: Icon(Icons.cached),
+            tooltip: 'Refresh',
+            onPressed: { print('Refreshing....') },
+          ) */
           IconButton(
             icon: updating ? Icon(Icons.play_arrow) : Icon(Icons.pause),
             tooltip: updating ? 'Continuous Updates' : 'Pause Updates',

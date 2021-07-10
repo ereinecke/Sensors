@@ -1,15 +1,19 @@
+import 'dart:core';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:location/location.dart';
+
+import 'displays.dart';
 
 class GetLocationWidget extends StatefulWidget {
   const GetLocationWidget({Key? key}) : super(key: key);
 
   @override
-  _GetLocationState createState() => _GetLocationState();
+  GetLocationState createState() => GetLocationState();
 }
 
-class _GetLocationState extends State<GetLocationWidget> {
+class GetLocationState extends State<GetLocationWidget> {
   final Location location = Location();
 
   bool _loading = false;
@@ -17,13 +21,13 @@ class _GetLocationState extends State<GetLocationWidget> {
   LocationData? _location;
   String? _error;
 
-  Future<void> _getLocation() async {
+  Future<void> getLocation() async {
     setState(() {
       _error = null;
       _loading = true;
     });
     try {
-      final LocationData _locationResult = await location.getLocation();
+      final _locationResult = await location.getLocation();
       setState(() {
         _location = _locationResult;
         _loading = false;
@@ -35,31 +39,7 @@ class _GetLocationState extends State<GetLocationWidget> {
       });
     }
   }
-/*
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          'Location: ' + (_error ?? '${_location ?? "unknown"}'),
-          style: Theme.of(context).textTheme.bodyText1,
-        ),
-        Row(
-          children: <Widget>[
-            ElevatedButton(
-              child: _loading
-                  ? const CircularProgressIndicator(
-                color: Colors.white,
-              )
-                  : const Text('Get'),
-              onPressed: _getLocation,
-            )
-          ],
-        ),
-      ],
-    );
-*/
+
 //TODO(ereinecke): localization
 
   @override
@@ -71,21 +51,77 @@ class _GetLocationState extends State<GetLocationWidget> {
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('Location sensors',
+              const Text('Location Sensors',
                   textAlign: TextAlign.start,
                   style: TextStyle(fontSize: 18)
               ),
               Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    _readout('Longitude', getLatitude()),
-                    _readout('Latitude', getLongitude()),
-                    _readout('Alt (m)', getAltitudeMeters()),
-                    _readout('Alt (ft)', getAltitudeFeet())
+                    readout('Longitude', getLatitude(_location)),
+                    readout('Latitude', getLongitude(_location)),
+                    readout('Alt (m)', getAltitudeMeters(_location)),
+                    readout('Alt (ft)', getAltitudeFeet(_location)),
                   ]),
-            ]),
-      ),
-    );
-
+              Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    readout('Heading', getHeading(_location)),
+                    readout('Speed', getSpeed(_location)),
+                    readout('Accuracy', getAccuracy(_location)),
+                    IconButton(
+                      //TODO(ereinecke): Animate icon while updating
+                      icon: Icon(Icons.cached),
+                      onPressed: getLocation,
+                    ),
+                  ]),
+      ]),
+    ));
   }
+
+  String getLatitude(LocationData? _location) {
+    if (_location == null) {
+      return "";
+    } else return _location.latitude!.toStringAsFixed(4);
+  }
+  String getLongitude(LocationData? _location) {
+    if (_location == null) {
+      return "";
+    } else return _location.longitude!.toStringAsFixed(4);
+  }
+
+  String getAltitudeMeters(LocationData? _location) {
+    if (_location == null) {
+      return "";
+    } else return _location.altitude!.toStringAsFixed(0);
+  }
+
+  String getAltitudeFeet(LocationData? _location) {
+    if (_location == null) {
+      return "";
+    } else {
+      var _alt_meters = _location.altitude! * 3.28084;
+      return _alt_meters.toStringAsFixed(0);
+    }
+  }
+
+  String getHeading(LocationData? _location) {
+    if (_location == null) {
+      return "";
+    } else return _location.heading!.toStringAsFixed(0);
+  }
+
+  String getSpeed(LocationData? _location) {
+    if (_location == null) {
+      return "";
+    } else return _location.speed!.toStringAsFixed(0);
+  }
+
+  String getAccuracy(LocationData? _location) {
+    if (_location == null) {
+      return "";
+    } else return _location.accuracy!.toStringAsFixed(0);
+  }
+
+
 }

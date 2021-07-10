@@ -4,54 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 
-
-// LocationData _dummyLocationData;
-
-/// TODO: replace dummy data
-String getLatitude() {
-  return '19.43487';
-}
-
-/// TODO: replace dummy data
-String getLongitude() {
-  return '-99.13186';
-}
-
-/// TODO: replace dummy data
-String getAltitudeMeters() {
-  return '2240';
-}
-
-/// TODO: replace dummy data
-String getAltitudeFeet() {
-  return '7350';
-}
-
-/// Card to display location sensors
-/// deprecated
-final locationDisplay = Card(
-  child: Container (
-    color: Colors.teal[50],
-    padding: const EdgeInsets.fromLTRB(8,8,8,12),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text('Location sensors',
-          textAlign: TextAlign.start,
-          style: TextStyle(fontSize: 18)
-        ),
-        Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-          _readout('Longitude', getLatitude()),
-          _readout('Latitude', getLongitude()),
-          _readout('Alt (m)', getAltitudeMeters()),
-          _readout('Alt (ft)', getAltitudeFeet())
-      ]),
-    ]),
-  ),
-);
-
 /// Card to display gyroscopic sensors
 final gyroSensorsDisplay = Card(
   child: Container (
@@ -86,8 +38,8 @@ final activityDisplay = Card(
           Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                _readout('Activity', 'coding'),
-                _readout('Or Maybe', 'snoozing'),
+                readout('Activity', 'coding'),
+                readout('Or Maybe', 'snoozing'),
           ]),
         ]),
   ),
@@ -106,8 +58,8 @@ final fitnessDisplay = Card(
           Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
               mainAxisSize: MainAxisSize.min,
              children: <Widget>[
-               _readout('Steps', '10,000'),
-              _readout('Heart Rate', '72'),
+               readout('Steps', '10,000'),
+               readout('Heart Rate', '72'),
           ]),
         ]),
   ),
@@ -137,7 +89,7 @@ final networkDisplay = Card(
   ),
 );
 
-Container _readout(String label, String value) {
+Container readout(String label, String value) {
   var readout = Container(
     margin: const EdgeInsets.all(4),
     padding: const EdgeInsets.all(4),
@@ -150,9 +102,11 @@ Container _readout(String label, String value) {
       children: [
         Text(value,
             textAlign: TextAlign.right,
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-        Text(label, textAlign: TextAlign.center),
-      ],
+            style: TextStyle(fontSize: 14)),
+        Text(label,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 11),
+        )],
     ),
   );
 
