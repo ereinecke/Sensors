@@ -3,26 +3,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
-import 'package:location_sensors/location.dart';
 
-LocationData _dummyLocationData;
+
+// LocationData _dummyLocationData;
+
 /// TODO: replace dummy data
-String getLatitude(LocationData locationData) {
+String getLatitude() {
   return '19.43487';
 }
 
 /// TODO: replace dummy data
-String getLongitude(LocationData locationData) {
+String getLongitude() {
   return '-99.13186';
 }
 
 /// TODO: replace dummy data
-String getAltitudeMeters(LocationData locationData) {
+String getAltitudeMeters() {
   return '2240';
 }
 
 /// TODO: replace dummy data
-String getAltitudeFeet(LocationData locationData) {
+String getAltitudeFeet() {
   return '7350';
 }
 
@@ -41,10 +42,10 @@ final locationDisplay = Card(
         Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-          _readout('Longitude', getLatitude(_dummyLocationData)),
-          _readout('Latitude', getLongitude(_dummyLocationData)),
-          _readout('Alt (m)', getAltitudeMeters(_dummyLocationData)),
-          _readout('Alt (ft)', getAltitudeFeet(_dummyLocationData))
+          _readout('Longitude', getLatitude()),
+          _readout('Latitude', getLongitude()),
+          _readout('Alt (m)', getAltitudeMeters()),
+          _readout('Alt (ft)', getAltitudeFeet())
       ]),
     ]),
   ),
@@ -142,7 +143,7 @@ Container _readout(String label, String value) {
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(4),
-      border: Border.all(color: Colors.blueGrey[200])
+      border: Border.all(color: Colors.blueGrey)
       ),
     child: Column(
       children: [
