@@ -1,10 +1,12 @@
+import 'dart:developer' as developer;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:loc_sensors/geolocation.dart';
+import 'package:loc_sensors/gyro_sensors.dart';
 import 'package:location/location.dart';
+
+import 'get_location.dart';
 import 'displays.dart';
-import 'geolocation.dart';
-import 'location.dart';
-import 'gyro_sensors.dart';
 import 'enable_in_background.dart';
 
 void main() {
@@ -13,6 +15,7 @@ void main() {
 
 class Sensors extends StatelessWidget {
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,25 +32,26 @@ class Sensors extends StatelessWidget {
 
 /// Main (and only screen): SensorsPage
 class SensorsPage extends StatefulWidget {
-  SensorsPage({Key key, this.title}) : super(key: key);
+  SensorsPage({Key? key, required this.title}) : super(key: key);
 
   final String title;
-  // TODO: extend class Card to include show and detail booleans?
+  // TODO(ereinecke): extend class Card to include show and detail booleans?
 
   @override
-  _SensorsPageState createState() => _SensorsPageState();
+  SensorsPageState createState() => SensorsPageState();
 }
 
 /// Saves state for app
-class _SensorsPageState extends State<SensorsPage> {
+class SensorsPageState extends State<SensorsPage> {
   bool updating = false; // whether to run updates or not
-  final Location location = Location();
-  LocationData locationData;
-  final Widget backgroundLocation = new EnableInBackgroundWidget();
+  Location location = Location();
+  // late LocationData locationData;
+  final EnableInBackgroundWidget backgroundLocator = new EnableInBackgroundWidget();
 
   /// Store a snapshot of all sensor data collected
   void _saveSensors() {
     setState(() {
+      // TODO(ereinecke): save backgroundLocator
       final snackBar =
           SnackBar(content: Text('Saving sensor data not yet implemented'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -67,7 +71,8 @@ class _SensorsPageState extends State<SensorsPage> {
             onPressed: () {
               setState(() {
                 updating = !updating;
-                backgroundLocation.toggleBackgroundMode();
+
+                /* toggleBackgroundMode(); */
               });
             },
           ),
@@ -85,8 +90,8 @@ class _SensorsPageState extends State<SensorsPage> {
               alignment: WrapAlignment.start,
               crossAxisAlignment: WrapCrossAlignment.start,
               children: <Widget>[
-                backgroundLocation,
-                locationDisplay,
+                backgroundLocator,
+                GetLocationWidget(),
                 gyroSensorsDisplay,
                 fitnessDisplay,
                 activityDisplay,

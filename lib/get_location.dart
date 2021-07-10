@@ -1,7 +1,3 @@
-/// Location functionality for Sensor
-///    Ported to get_location.dart
-///
-/*
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:location/location.dart';
@@ -39,7 +35,7 @@ class _GetLocationState extends State<GetLocationWidget> {
       });
     }
   }
-
+/*
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -63,6 +59,33 @@ class _GetLocationState extends State<GetLocationWidget> {
         ),
       ],
     );
+*/
+//TODO(ereinecke): localization
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Container (
+        color: Colors.teal[50],
+        padding: const EdgeInsets.fromLTRB(8,8,8,12),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text('Location sensors',
+                  textAlign: TextAlign.start,
+                  style: TextStyle(fontSize: 18)
+              ),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    _readout('Longitude', getLatitude()),
+                    _readout('Latitude', getLongitude()),
+                    _readout('Alt (m)', getAltitudeMeters()),
+                    _readout('Alt (ft)', getAltitudeFeet())
+                  ]),
+            ]),
+      ),
+    );
+
   }
 }
-*/

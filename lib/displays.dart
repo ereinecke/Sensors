@@ -28,6 +28,7 @@ String getAltitudeFeet() {
 }
 
 /// Card to display location sensors
+/// deprecated
 final locationDisplay = Card(
   child: Container (
     color: Colors.teal[50],

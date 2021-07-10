@@ -1,31 +1,33 @@
 /// Enable or disable location in the background
+/// Code for location package
 ///
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:location/location.dart';
+export 'main.dart';
 
 class EnableInBackgroundWidget extends StatefulWidget {
-  const EnableInBackgroundWidget({Key key}) : super(key: key);
+  const EnableInBackgroundWidget({Key? key}) : super(key: key);
 
   @override
-  _EnableInBackgroundState createState() => _EnableInBackgroundState();
+  EnableInBackgroundState createState() => EnableInBackgroundState();
 }
 
-class _EnableInBackgroundState extends State<EnableInBackgroundWidget> {
+class EnableInBackgroundState extends State<EnableInBackgroundWidget> {
   final Location location = Location();
 
   bool _enabled = false;
-  String _error;
+  String _error = '';
 
   @override
   void initState() {
-    _checkBackgroundMode();
+    checkBackgroundMode();
     super.initState();
   }
 
-  Future<void> _checkBackgroundMode() async {
+  Future<void> checkBackgroundMode() async {
     setState(() {
-      _error = null;
+      _error = '';
     });
     final bool result = await location.isBackgroundModeEnabled();
     setState(() {
@@ -35,11 +37,11 @@ class _EnableInBackgroundState extends State<EnableInBackgroundWidget> {
 
   Future<void> toggleBackgroundMode() async {
     setState(() {
-      _error = null;
+      _error = '';
     });
     try {
-      final bool result =
-      await location.enableBackgroundMode(enable: !(_enabled ?? false));
+      final result =
+        await location.enableBackgroundMode(enable: !(_enabled ? false : true));
       setState(() {
         _enabled = result;
       });

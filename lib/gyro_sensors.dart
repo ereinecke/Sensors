@@ -1,7 +1,6 @@
-import 'package:sensors/sensors.dart';
+import 'package:sensors_plus/sensors_plus.dart';
 
-/// Code snippet from sensors package
-/*
+/* sample code
 accelerometerEvents.listen((AccelerometerEvent event) {
 print(event);
 });
@@ -16,4 +15,4 @@ gyroscopeEvents.listen((GyroscopeEvent event) {
 print(event);
 });
 // [GyroscopeEvent (x: 0.0, y: 0.0, z: 0.0)]
- */
+*/
