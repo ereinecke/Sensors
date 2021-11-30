@@ -1,6 +1,9 @@
 /// Enable or disable location in the background
 /// Code for location package
 ///
+/// For best practices on location permissions:
+/// https://developer.android.com/training/location/permissions#request-background-location
+///
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:location/location.dart';
@@ -16,8 +19,8 @@ class EnableInBackgroundWidget extends StatefulWidget {
 class EnableInBackgroundState extends State<EnableInBackgroundWidget> {
   final Location location = Location();
 
-  bool _enabled = false;
-  String _error = '';
+  bool? _enabled = false;
+  String? _error;
 
   @override
   void initState() {
@@ -27,7 +30,7 @@ class EnableInBackgroundState extends State<EnableInBackgroundWidget> {
 
   Future<void> checkBackgroundMode() async {
     setState(() {
-      _error = '';
+      _error = null;
     });
     final bool result = await location.isBackgroundModeEnabled();
     setState(() {
@@ -37,11 +40,11 @@ class EnableInBackgroundState extends State<EnableInBackgroundWidget> {
 
   Future<void> toggleBackgroundMode() async {
     setState(() {
-      _error = '';
+      _error = null;
     });
     try {
       final result =
-        await location.enableBackgroundMode(enable: !(_enabled ? false : true));
+        await location.enableBackgroundMode(enable: !(_enabled! ? true : false));
       setState(() {
         _enabled = result;
       });
@@ -57,16 +60,16 @@ class EnableInBackgroundState extends State<EnableInBackgroundWidget> {
    */
   @override
   Widget build(BuildContext context) {
-    String status = "";
+    var status = '';
     if (_error != null) {
-      status = "Aquisition error: " + _error;
+      status = "Aquisition error: " + _error!;
     } else {
-      if (_enabled) {status = "Aquiring sensor data";}
+      if (_enabled!) {status = "Aquiring sensor data";}
       else {status = "Aquisition paused";}
     }
     // TODO: figure out what to return as the actual widget with no display.
     return
       Text(status,
-        textAlign: TextAlign.center);
+        style: TextStyle(fontSize: 11));
   }
 }

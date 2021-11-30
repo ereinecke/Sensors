@@ -14,9 +14,11 @@ class GetLocationWidget extends StatefulWidget {
 }
 
 class GetLocationState extends State<GetLocationWidget> {
-  final Location location = Location();
+  Location location = Location();
 
   bool _loading = false;
+  late bool serviceEnabled;
+  late PermissionStatus _permissionGranted;
 
   LocationData? _location;
   String? _error;
